@@ -12,6 +12,11 @@ import SwiftyBeaver
 @objcMembers
 public final class Logger: NSObject {
     
+    public enum Destination {
+        case logstash
+        case fluentd
+    }
+    
     internal enum LogType {
         case debug
         case warning
@@ -66,6 +71,12 @@ public final class Logger: NSObject {
     public var logstash: LogstashDestination!
     public var file: FileDestination!
     
+    // fluentd conf
+    public var tagPrefix: String?
+       
+    // destination conf
+    public var destination: Destination = .fluentd
+    
     deinit {
         timer?.suspend()
         timer = nil
@@ -101,6 +112,8 @@ public final class Logger: NSObject {
                                                    allowUntrustedServer: allowUntrustedServer)
             logstash = LogstashDestination(socket: socket, logActivity: logLogstashSocketActivity)
             logstash.logzioToken = logzioToken
+            logstash.tagPrefix = tagPrefix
+            logstash.destination = destination
             internalLogger.addDestination(logstash)
             
             timer = RepeatingTimer(timeInterval: timerInterval)

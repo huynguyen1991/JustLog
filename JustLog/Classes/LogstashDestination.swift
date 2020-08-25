@@ -37,6 +37,12 @@ public class LogstashDestination: BaseDestination  {
     private let socket: LogstashDestinationSocketProtocol
     private var logsInSocketQueue = [Int]()
     
+    // fluentd conf
+    internal var tagPrefix: String?
+
+    // destination conf
+    internal var destination: Logger.Destination = .fluentd
+    
     @available(*, unavailable)
     override init() {
         fatalError()
@@ -136,11 +142,23 @@ public class LogstashDestination: BaseDestination  {
         var data = Data()
         
         do {
-            data = try JSONSerialization.data(withJSONObject:dict, options:[])
-            
-            if let encodedData = "\n".data(using: String.Encoding.utf8) {
-                data.append(encodedData)
-            }
+            if destination == .fluentd {
+                 guard let tag = tagPrefix else { fatalError("Fluentd must have tagPrefix") }
+                 let timestamp = NSNumber(value: Date().timeIntervalSince1970)
+                 var array = Array<Any>()
+                 array.append(tag)
+                 array.append(timestamp)
+                 array.append(dict)
+                 data = try JSONSerialization.data(withJSONObject:array, options:[])
+                 if let encodedData = "\n".data(using: String.Encoding.utf8) {
+                   data.append(encodedData)
+                 }
+             } else if destination == .logstash {
+                 data = try JSONSerialization.data(withJSONObject:dict, options:[])
+                 if let encodedData = "\n".data(using: String.Encoding.utf8) {
+                   data.append(encodedData)
+                 }
+             }
         } catch {
             print(error.localizedDescription)
         }
