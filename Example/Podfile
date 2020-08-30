@@ -4,7 +4,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'JustLog_Example' do
-  pod 'JustLog', :path => '../'
+  pod 'JustLogPlus', :path => '../'
 
   target 'JustLog_Tests' do
     inherit! :search_paths

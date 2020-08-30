@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint JustLog.podspec' to ensure this is a
+# Be sure to run `pod lib lint JustLogPlus.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,19 +7,18 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'JustLog'
-  s.version          = '3.1.0'
+  s.name             = 'JustLogPlus'
+  s.version          = '3.1.1'
   s.summary          = 'JustLog brings logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket with no effort.'
 
   s.description      = "<<-DESC
   JustLog brings logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket out of the box. You can setup JustLog to use [logz.io](http://logz.io) with no effort. JustLog relies on SwiftyBeaver, exposes a simple swifty API but it plays just fine also with Objective-C.
                          DESC"
 
-  s.homepage         = 'https://github.com/justeat/JustLog'
+  s.homepage         = 'https://github.com/huynguyen1991/JustLog'
   s.license          = { :type => 'Apache 2.0', :file => 'LICENSE' }
-  s.authors          = { 'Alberto De Bortoli' => 'alberto.debortoli@just-eat.com', 'Shabeer Hussain' => 'shabeer.hussain@just-eat.com', 'Andre Jacobs' => 'andre.jacobs@just-eat.com', 'Antonio Strijdom' => 'antonio.strijdom"just-eat.com' }
-  s.source           = { :git => 'https://github.com/justeat/JustLog.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/justeat_tech'
+  s.authors          = { 'Alberto De Bortoli' => 'alberto.debortoli@just-eat.com', 'Shabeer Hussain' => 'shabeer.hussain@just-eat.com', 'Andre Jacobs' => 'andre.jacobs@just-eat.com', 'Antonio Strijdom' => 'antonio.strijdom"just-eat.com', 'Huy Nguyen' => 'huuhuy.nguyen1991@gmail.com' }
+  s.source           = { :git => 'https://github.com/huynguyen1991/JustLog.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
   s.tvos.deployment_target = '10.0'

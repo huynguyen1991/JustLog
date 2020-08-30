@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import JustLog
+@testable import JustLogPlus
 
 class LogstashDestinationTests: XCTestCase {
 

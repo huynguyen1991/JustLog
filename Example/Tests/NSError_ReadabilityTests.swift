@@ -1,6 +1,6 @@
 import UIKit
 import XCTest
-@testable import JustLog
+@testable import JustLogPlus
 
 class NSError_Flattening: XCTestCase {
     

@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import JustLog
+@testable import JustLogPlus
 
 class String_Conversion: XCTestCase {
     

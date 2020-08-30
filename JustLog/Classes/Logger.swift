@@ -88,14 +88,14 @@ public final class Logger: NSObject {
         
         // console
         if enableConsoleLogging {
-            console = JustLog.ConsoleDestination()
+            console = JustLogPlus.ConsoleDestination()
             console.format = format
             internalLogger.addDestination(console)
         }
         
         // file
         if enableFileLogging {
-            file = JustLog.FileDestination()
+            file = JustLogPlus.FileDestination()
             file.format = format
             if let baseURL = self.baseUrlForFileLogging {
                 file.logFileURL = baseURL.appendingPathComponent(logFilename ?? "justeat.log", isDirectory: false)

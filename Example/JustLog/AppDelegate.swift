@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import JustLog
+import JustLogPlus
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import JustLog
+import JustLogPlus
 
 class ViewController: UIViewController {
 

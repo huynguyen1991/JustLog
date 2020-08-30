@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-@testable import JustLog
+@testable import JustLogPlus
 
 class Dictionary_JSON: XCTestCase {
     
