@@ -28,7 +28,7 @@ JustLog sets the focus on remote logging, but fully covers the basic needs of lo
 JustLog, is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:
 
 ```ruby
-pod "JustLog"
+pod "JustLogPlus"
 ```
 
 Import it into your files like so:
