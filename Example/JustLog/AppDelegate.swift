@@ -8,6 +8,7 @@
 
 import UIKit
 import JustLogPlus
+import SwiftyBeaver
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -43,6 +44,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func allowSendLog() -> [SwiftyBeaver.Level] {
+        var allowSendLog = [SwiftyBeaver.Level]()
+        for item in 0...10 {
+            let result = SwiftyBeaver.Level(rawValue: item)
+            if let cResult = result {
+                allowSendLog.append(cResult)
+            }
+         }
+        return allowSendLog
+    }
+    
     private func setupLogger() {
         
         let logger = Logger.shared
@@ -65,6 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.tagPrefix = "yyyy"
         logger.destination = .fluentd
         logger.allowUntrustedServer = true
+        logger.allowSendLog = allowSendLog()
         
         // logz.io support
         //logger.logzioToken = <logzioToken>
