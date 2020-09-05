@@ -230,7 +230,10 @@ extension Logger {
 
         
         if let error = error {
-            retVal[errorsConst] = error.disassociatedErrorChain().map { return errorDictionary(for: $0) }
+            let errorDictionaries = error.disassociatedErrorChain()
+                .map { errorDictionary(for: $0) }
+                .filter { $0.values.allSatisfy { JSONSerialization.isValidJSONObject($0) } }
+            retVal[errorsConst] = errorDictionaries
         }
         
         
