@@ -44,15 +44,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func allowSendLog() -> [SwiftyBeaver.Level] {
-        var allowSendLog = [SwiftyBeaver.Level]()
+    func specifiesTypesAllowsSend() -> [SwiftyBeaver.Level] {
+        var specifiesTypesAllowsSend = [SwiftyBeaver.Level]()
         for item in 0...10 {
             let result = SwiftyBeaver.Level(rawValue: item)
             if let cResult = result {
-                allowSendLog.append(cResult)
+                specifiesTypesAllowsSend.append(cResult)
             }
          }
-        return allowSendLog
+        return specifiesTypesAllowsSend
     }
     
     private func setupLogger() {
@@ -77,7 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         logger.tagPrefix = "yyyy"
         logger.destination = .fluentd
         logger.allowUntrustedServer = true
-        logger.allowSendLog = allowSendLog()
+        logger.specifiesTypesAllowsSend = specifiesTypesAllowsSend()
         
         // logz.io support
         //logger.logzioToken = <logzioToken>

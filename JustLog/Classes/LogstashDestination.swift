@@ -43,7 +43,7 @@ public class LogstashDestination: BaseDestination  {
     // destination conf
     internal var destination: Logger.Destination = .fluentd
     
-    internal var allowSendLog = [SwiftyBeaver.Level]()
+    internal var specifiesTypesAllowsSend = [SwiftyBeaver.Level]()
     
     @available(*, unavailable)
     override init() {
@@ -77,7 +77,7 @@ public class LogstashDestination: BaseDestination  {
     override public func send(_ level: SwiftyBeaver.Level, msg: String, thread: String, file: String,
                               function: String, line: Int, context: Any? = nil) -> String? {
         
-        if let dict = msg.toDictionary(), allowSendLog.contains(level) {
+        if let dict = msg.toDictionary(), specifiesTypesAllowsSend.contains(level) {
             var flattened = dict.flattened()
             if let logzioToken = logzioToken {
                 flattened = flattened.merged(with: [logzioTokenKey: logzioToken])

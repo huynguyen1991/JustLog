@@ -77,7 +77,7 @@ public final class Logger: NSObject {
     // destination conf
     public var destination: Destination = .fluentd
     
-    public var allowSendLog = [SwiftyBeaver.Level]()
+    public var specifiesTypesAllowsSend: [SwiftyBeaver.Level] = [.debug, .error, .info, .verbose, .warning]
     
     deinit {
         timer?.suspend()
@@ -115,7 +115,7 @@ public final class Logger: NSObject {
             logstash = LogstashDestination(socket: socket, logActivity: logLogstashSocketActivity)
             logstash.logzioToken = logzioToken
             logstash.tagPrefix = tagPrefix
-            logstash.allowSendLog = allowSendLog
+            logstash.specifiesTypesAllowsSend = specifiesTypesAllowsSend
             logstash.destination = destination
             internalLogger.addDestination(logstash)
             
