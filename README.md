@@ -19,7 +19,7 @@ In the mobile world, the common approach to investigating issues is gathering lo
 
 We believe tracking is different in nature from logging and that mobile apps should take advantage of ELK too in order to take their monitoring and analysis to another level. Remote logging the right set of information could provide valuable information that would be difficult to gather otherwise, unveil unexpected behaviours and bugs, and even if the data was properly anonymized, identify the sequences of actions of singular users.
 
-JustLog takes logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket out of the box. You can also setup JustLog to use [logz.io](http://logz.io) with no effort. JustLog relies on [CocoaAsyncSocket](https://github.com/robbiehanson/CocoaAsyncSocket) and [SwiftyBeaver](https://github.com/SwiftyBeaver/SwiftyBeaver), exposes a simple swifty API but it also plays just fine with Objective-C.
+JustLog takes logging on iOS to the next level. It supports console, file and remote Logstash logging via TCP socket out of the box. You can also setup JustLog to use [logz.io](http://logz.io) with no effort. JustLog relies on [URLSession] and [SwiftyBeaver](https://github.com/SwiftyBeaver/SwiftyBeaver), exposes a simple swifty API but it also plays just fine with Objective-C.
 
 JustLog sets the focus on remote logging, but fully covers the basic needs of local console and file logging.
 
@@ -217,12 +217,29 @@ let logger = Logger.shared
 logger.logstashHost = "my.logstash.endpoint.com"
 logger.logstashPort = 3515
 logger.logstashTimeout = 5
+logger.destination = .logstash
 logger.logLogstashSocketActivity = true
 ```
 
 When the `logLogstashSocketActivity` is set to true, socket activity is printed to the console:
 
 ![Socket Activity](./img/socket_activity.png)
+
+## A note on Fluentd destination
+
+The Fluentd destination is configured via properties exposed by the Logger. E.g.:
+
+```swift
+let logger = Logger.shared
+logger.logstashHost = "my.logstash.endpoint.com"
+logger.logstashPort = 3515
+logger.logstashTimeout = 5
+logger.tagPrefix = "yyyy"
+logger.destination = .fluentd
+logger.logLogstashSocketActivity = true
+logger.specifiesTypesAllowsSend = [.debug, .error]
+```
+The `specifiesTypesAllowsSend` is specified log type sent to server.
 
 This destination is the only asynchronous destination that comes with JustLog. This means that logs to Logstash are batched and sent at some point in future when the timer fires. The `logstashTimeout` property can be set to the number of seconds for the dispatch.
 In some cases, it might be important to dispatch the logs immediately after an event occurs like so:
